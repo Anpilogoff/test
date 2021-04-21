@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2021 by anonymous (http://jsbin.com/rovivufuho/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+@keyframes reclick {
+    from {
+        background: linear-gradient(to bottom, rgb(0, 255, 98), #00000000);
+        box-shadow: red 0px 0px 1px 2px;
+        background-position-y: 111px;
+    }
+    to {
+        background: linear-gradient(to bottom, rgb(0, 255, 98), #00000000);
+        box-shadow: rgb(0 255 127) 0px 0px 1px 2px;
+        background-position-y: 28px;
+    }
+}
+@keyframes click {
+    from {
+        background: linear-gradient(to bottom, red, #00000000);
+        box-shadow: rgb(0 255 127) 0px 0px 1px 2px;
+        background-position-y: 28px;
+    }
+    to {
+        background: linear-gradient(to bottom, red, #00000000);
+        box-shadow: red 0px 0px 1px 1px;
+        background-position-y: 111px;
+    }
+}
+@keyframes turnOn {
+    0% {
+        color: black;
+    }
+    10% {
+        color: white;
+    }
+    30% {
+        color: black;
+    }
+    50% {
+        color: white;
+    }
+    55% {
+        color: black;
+    }
+    52% {
+        color: white;
+    }
+    54% {
+        color: black;
+    }
+    56% {
+        color: white;
+    }
+    56% {
+        color: black;
+    }
+    58% {
+        color: white;
+    }
+    60% {
+        color: black;
+    }
+    62% {
+        color: white;
+    }
+    65% {
+        color: black;
+    }
+    100% {
+        color: white;
+    }
+}
+@keyframes turnOff {
+    from {
+        color: rgb(0, 255, 98);
+    }
+    to {
+        color: red;
+    }
+}
+@keyframes rotateCube {
+    0% {
+        transform: rotate3d(-2, -4, -15, -75deg);
+        color: black;
+        text-shadow: 0px 0px 10px;
+    }
+    50% {
+        transform: rotate3d(-231, 29, -13, -13120deg);
+        color: #1f1f1f;
+        text-shadow: 0px 10px 10px;
+    }
+    100% {
+        transform: rotate3d(-21, 9, -15, -75deg);
+        color: black;
+        text-shadow: 0px 0px 10px;
+    }
+}
+@keyframes rotations {
+    0% {
+        transform: rotate3d(-2, -4, -15, -75deg);
+        color: black;
+        text-shadow: 0px 0px 10px;
+        border: solid 2px white;
+    }
+    50% {
+        transform: rotate3d(-21, 9, -13, 120deg);
+        color: #1f1f1f;
+        border: solid 1px whitesmoke;
+        text-shadow: 0px 10px 10px;
+    }
+    100% {
+        transform: rotate3d(-4, -8, -26, -150deg );
+        color: black;
+        text-shadow: 0px 0px 10px;
+    }
+}
+body {
+position: absolute;
+width: 100%;
+height: 100%;
+    perspective: 800px;
+    transition: 3.5s ease-in-out;
+    margin: 0;
+    background: linear-gradient(45deg, #343434bd, #171717b0);
+    z-index: 3;
+    overflow: hidden;
+    cursor: pointer;
+}
+.avatar-upload-form {
+    position: relative;
+    width: 100%;
+    height: 10%;
+}
+
+.avatar{
+    border: 3px solid;
+    top: -1%;
+    z-index: 10;
+    right: 15%;
+    float: right;
+    background-color: #ffffff;
+    position: absolute;
+    width: 100px;
+    height: 110px;
+    border-radius: 20%;
+    box-shadow: inset black 0px -1px 6px 4px, 1px 0px 61px 3px inset lightgreen, -15px 1px 0px 54px #171717 inset, black -1px -2px 0px 14px inset;
+}
+
+.focusMusic {
+    background: none;
+    outline: none;
+    color: red;
+    box-shadow: 0px 0px 5px 1px orangered;
+    border: orangered 1px solid;
+}
+#music-button {
+    animation: musa 3s linear;
+    outline: none;
+    text-shadow:  1px -1px 3px black, 0px 0px 4px #00fea2, 0px 4px 17px rgb(167 255 25 / 82%), 0px 1px 58px #f60228, 0px -3px 1px #000000;
+    top: 24%;
+    left: 5%;
+    transition: 1.5s linear;
+    color: white;
+    font-size: 25px;
+    font-weight: bolder;
+    position: relative;
+    margin-left: 2%;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    float: left;
+    border-radius: 12px;
+    background-size: 205px;
+    background: #4600e880;
+    box-shadow: #000000f2 0px 0px 4px 5px, #4600e880 0px 0px 6px 4px inset, #4600e880 0px -2px 21px -1px inset;
+}
+#music-button:hover {
+    border: 3px solid rgb(2 246 180/89%);
+    top: 35%;
+    float: left;
+    color: rgb(2 244 246/96%);
+    font-size: 25px;
+    font-weight: bold;
+    position: relative;
+    margin-left: 2%;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    border-radius: 12px;
+    transition: ease-in-out 1s;
+    filter: blur(1px);
+    text-shadow: -1px 2px 3px black, #f60228 -1px 1px 9px, 2px -1px 9px rgb(255 255 255), -2px 2px 19px rgb(255 255 255), 1px -1px 0px white, 1px 1px 0px #ffffffcc;
+}
+#but {
+    outline: none;
+    left: 5%;
+    animation: musa 2s linear;
+    text-shadow: -1px -2px 5px black, 0px 0px 5px rgb(25 255 161), 0px 0px 1px white, 0px 0px 2px white, 0px 0px 4px #ffffffcc;
+    top: 24%;
+    transition: 1s linear;
+    font-weight: bolder;
+    position: relative;
+    margin-left: 2%;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    float: left;
+    border-radius: 12px;
+    background: #00000000;
+    box-shadow: black 0px 0px 4px 5px, #079df8 0px 0px 6px 4px, black 0px 0px 4px inset;
+}
+#but:hover {
+    color: white;
+    box-shadow: 0px -9px 16px -5px inset #ccff0a00, inset 0px -7px 9px -9px rgb(204 255 2 / 0%), 0px 0px 18px 1px #079df8c7, inset 0px -1px 3px white;
+    text-shadow: 0px 0px 2px white,0px 0px 2px white;
+}
+#but:focus {
+    outline: none;
+    color: orange;
+    text-shadow: 0px -1px 4px orangered, 0px 0px 10px orangered, 2px 2px 0px rgba(206, 89, 55, 0);
+    box-shadow: inset 1px 1px 3px red,inset -1px -1px 3px red;
+    border: solid 1px red;
+}
+.contacts-button {
+    animation: musa 3s linear;
+    outline: none;
+    left: 5%;
+    text-shadow: -1px -2px 5px black, 0px 1px 4px rgb(167 255 25 / 82%), 1px -2px 1px black, -1px 0px 1px black, 1px 1px 23px #ffffffcc;
+    font-weight: bolder;
+    position: relative;
+    margin-left: 2%;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    float: left;
+    border-radius: 12px;
+    background: #00000000;
+    box-shadow: black 0px 0px 4px 5px, #e6dc19 0px 0px 6px 4px, black 0px 0px 4px inset;
+}
+.contacts-button:hover {
+    color: white;
+    box-shadow: 0px -20px 30px -4px inset #f60228, inset 0px -7px 9px 9px rgb(204 255 2), 0px -2px 3px 1px #f60228;
+}
+.question-button {
+    animation: musa 4s linear;
+    outline: none;
+    left: 5%;
+    text-shadow: 0px 0px 5px white, 0px 0px 1px white, 0px 0px 1px black, 0px 0px 2px #ffffffcc;
+    transition: 1.5s linear;
+    color: #f60228;
+    font-size: 25px;
+    font-weight: bolder;
+    position: relative;
+    margin-left: 2%;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    float: left;
+    border-radius: 12px;
+    background: #00000000;
+    box-shadow: black 0px 0px 0px 3px, #F60228 0px 0px 6px 5px, black 0px 0px 1px 3px inset;
+}
+.question-button:hover {
+    color: white;
+    text-shadow: 0px 0px 2px white,
+    0px 0px 2px white;
+    box-shadow: inset 1px 1px 3px rgba(9, 9, 9, 0.91),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.91);
+}
+#status {
+    transition: 2s linear;
+    background-position-y: 111px;
+    position: absolute;
+    outline: none;
+    width: 27px;
+    height: 25px;
+    border: none;
+    background: linear-gradient(to bottom, #00000070, #00000000);
+    box-shadow: red 0px 0px 1px 2px;
+    font-weight: bolder;
+    text-shadow: black 1px 1px 1px, black -1px -1px 1px, black 0px 0px 1px, black 0px 0px 1px, black 0px 0px 3px, black 0px 0px 3px;
+    font-size: 25px;
+    color: red;
+    float: left;
+    top: 3%;
+    left: 4%;
+    border-radius: 20px;
+}
+#unknown {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 3;
+    top: 40%;
+    left: 40%;
+    background-color: #171717;
+    box-shadow: white 2px 2px 3px 3px, white 2px 2px 3px 3px;
+}
+.ul {
+    padding-left: 0px;
+    overflow: hidden;
+    z-index: 5;
+    position: relative;
+    width: 100%;
+    height: 10%;
+    transition: 5s linear;
+    opacity: 90%;
+    background: #1f1f1f;
+    box-shadow: black 4px -2px 4px 8px, black 0px 3px 5px 2px, black -2px 2px 22px 11px inset, black 0px -2px 43px -22px inset;
+}
+.large-header {
+    position: relative;
+    color: #07c8f8;
+}
+#choose-file-button {
+    display: none;
+    width: 1%;
+    height: 1%;
+    position: relative;
+    box-shadow: white 0px 0px 3px 1px inset;
+}
+
+
+
+
+#chat-wraper{
+    position: absolute;
+    width: 500px;
+    height: 400px;
+    z-index: 4;
+
+
+
+}
+
+.chat-box {
+    perspective: 300px;
+    position: relative;
+scrollbar-track-color: #0bffdf ;
+    color: #15e48f;
+    backdrop-filter: blur(3px);
+    z-index: 4;
+    border-radius: 13px;
+    width: 500px;
+    height: 350px;
+    background: linear-gradient(to bottom, #0525cc0d, #071cef12);
+    box-shadow: inset #0bffdf 0px 0px 6px 0px, 0px 0px 6px 2px #4804d4, 0px 0px 2px 4px #272629 inset, 0px 0px 1px 4px #00f369ed;
+    border: 2px #0bffdf solid;
+    transition: linear 1.5s;
+    font-size: 15px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#users-online {
+    transition: 0.9s ease-in-out;
+    transform-style: preserve-3d;
+    position: absolute;
+    z-index: 5;
+    width: 0%;
+    height: 0%;
+    left: -1%;
+    top: -1%;
+    box-shadow: 0px 0px 3px 2px rgb(0 0 0), 0px 0px 29px -8px #000000ed inset, -1px 0px 15px 2px #000000, -1px 1px 14px 2px black, 1px 0px 2px 0px inset crimson;
+    background: linear-gradient(290deg, #00000026, #000000), linear-gradient(19deg, #000000, #30303073);
+    border: 2px #0bffdf00 solid;
+    caret-color: #ff000000;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 19px;
+    border-bottom-left-radius: 19px;
+    overflow-y: scroll;
+
+}
+
+
+
+#gear-button {
+    outline: none;
+    float: right;
+    right: 2%;
+    top: 5%;
+    text-shadow: 1px 1px 5px black,
+    -1px -1px 5px black;
+    box-shadow: none;
+    border-radius: 20px;
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    transition: 1.5s linear;
+    background-color: #1c1c1c;
+}
+
+
+.fa-arrow-circle-o-up {
+    position: relative;
+    left: 0px;
+}
+#scroll-up {
+    text-Shadow: black 2px 1px 5px, black -1px -1px 5px;
+    outline: none;
+    left: 85px;
+    top: -7px;
+    font-size: 25px;
+    font-weight: bolder;
+    position: absolute;
+    margin: 10px;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    border: 1px #212121;
+    border-radius: 20px;
+    background: #3b3b3b;
+    filter: drop-shadow(1px -1px 3px black);
+    transition: 1.5s linear;
+}
+#scroll-up:hover {
+    transition: 1.5s ease-out;
+    transform: rotate(360deg);
+    text-shadow: 0px 0px 2px white,
+    0px 0px 2px white;
+    box-shadow: inset 3px 2px 4px rgba(9, 9, 9, 0.91),
+    inset -3px -2px 4px rgba(0, 0, 0, 0.91);
+
+}
+#messageBlock {
+
+    top: 60%;
+    left: 101%;
+    position: relative;
+    overflow: hidden;
+    width: 420px;
+    height: 70px;
+    caret-color: red;
+    transition: 1.5s ease-in-out;
+}
+#sendButton {
+    text-shadow: -1px 0px 2px #0bffdf,1px 0px 1px #0bffdf;
+    transition: 0.5s ease-in-out;
+    font-size: 20px;
+    position: absolute;
+    top: 25%;
+    right: -13%;
+    color: #0bffdf;
+    background: black;
+    border-radius: 5px;
+    height: 30px;
+    width: 45px;
+}
+
+#u {
+    position: relative;
+    float: left;
+    width: 50px;
+    font-size: 22px;
+    top: -50%;
+    left: 6%;
+    text-shadow: #15e48f 0px 0px 0px, #06ffe9 0px 0px 1px, #ffffff 0px 0px 1px, #15e48f 0px 1px 4px, #ffffff 0px 0px 0px, 0px 0px 1px white, black 0px 0px 1px, #fffdfd 0px 0px 1px, #15e48f 0px 0px 1px, 1px 0px 4px black;
+
+    -webkit-text-fill-color: #02f6227d;
+
+}
+#message {
+    overflow: hidden;
+    text-shadow: #15e48f 0px 0px 0px, #06ffe9 0px 0px 1px, #ffffff 0px 0px 1px, #15e48f 0px 1px 4px, #ffffff 0px 0px 0px, 0px 0px 1px white, black 0px 0px 1px, #fffdfd 0px 0px 1px, #15e48f 0px 0px 1px, 1px 0px 4px black;
+    font-size: 20px;
+    -webkit-text-fill-color: #02f6227d; /*#029af67d*/
+    font-weight: 400;
+
+    position: relative;
+    padding-left: 70px;
+
+    top: 5px;
+    left: 10px;
+    caret-color: #15e48f;
+    caret-shape: block;
+    border-top: #f60228 1px solid;
+    border-bottom: #f60228 1px solid;
+    border-left: #f60228 1px solid;
+    border-right: #f60228 1px solid;
+
+    height: 50px;
+    width: 420px;
+    transition: ease-out 2s;
+    border-radius: 14px;
+    background: #0a071c54;
+    box-shadow: 5px 1px 6px 4px #3f0000 inset, inset 0px 0px 1px 2px #ed0765a1, 0px 0px 1px 2px #000000, 0px 0px 0px 2px #ffffff;
+
+    /*backdrop-filter: drop-shadow(-2px -2px 3px  #424242 );*/
+
+    outline: none;
+}
+#message:hover {
+}
+#message:focus {
+}
+input::selection {
+    -webkit-text-fill-color: white;
+    text-shadow: 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 1px 0px 3px white, 1px 1px 1px white, -1px -1px 1px white;
+    background: none;
+}
+.content {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 60%;
+}
+#thefile {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+#settingsWindow{
+    position: absolute;
+    z-index: 3;
+    transition: 1.5s linear;
+    top: 10%;
+    left: 100%;
+    width: 4%;
+    height: 35%;
+
+    border-radius: 15px;
+    background: #2424248a;
+    
+            box-shadow:0px 0px 10px 0px #ffffff57, -10px 0px 12px 2px black;
+
+}
+
+
+.icons-container{
+    width: 100%;
+    height: 100%;
+
+    background: #151515;
+    border: 1px solid #f60228;
+    box-shadow: 0px 0px 1px 1px #f60228;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#cubeStyle{
+    position: absolute;
+    width: 80%;
+    height: 40%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.25);
+
+}
+
+#cubeSettingButton{
+    text-shadow:rgb(0 255 168) 0px 0px 1px, rgb(0 255 168) 0px -1px 1px, black 0px 0px 2px, rgb(0 255 168) 0px 0px 3px, black -4px 1px 10px, black -1px 0px 1px;
+    font-size: 25px;
+    color: black;
+    outline: none;
+    border: none;
+    background: #191919;
+    position: relative;
+    width: 95%;
+    left: 2.5%;
+    height: 20%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 0px 2px 1px black inset;
+    transition: 0.5s linear;
+}
+
+#cubeSettingButton:hover{
+    color: black;
+    text-shadow:0px -1px 1px white, 0px 0px 2px white, 0px 1px 3px white, -1px -1px 0px white, -1px 0px 1px white;
+}
+
+#equalizerSettingButton{
+    text-shadow: rgb(0 255 168) 0px 0px 1px, rgb(0 255 168) 0px -1px 1px, black 0px 0px 2px, rgb(0 255 168) 0px 0px 3px, black -4px 1px 10px, black -1px 0px 1px;
+    font-size: 25px;
+    color: black;
+    outline: none;
+    border: none;
+    background: #191919 ;
+    position: relative;
+    width: 95%;
+    height: 20%;
+    box-shadow: 0px 0px 2px 1px black inset;
+    transition: 0.5s linear;
+    left: -95%;
+}
+
+#equalizerSettingButton:hover{
+    /*text-shadow: 0px -1px 1px white, 0px 0px 1px white, 0px 0px 1px white, -1px -1px 2px white, -1px 0px 1px white;*/
+    text-shadow: black 0px 0px 1px, black 0px 2px 3px, black 1px 0px 2px, white 0px 0px 4px, black -1px -1px 0px, black -1px 0px 1px;
+    color: white;
+}
+
+#chatWindowSettingButton{
+    text-shadow:rgb(0 255 168) 0px 0px 1px, rgb(0 255 168) 0px -1px 1px, black 0px 0px 2px, rgb(0 255 168) 0px 0px 3px, black -4px 1px 10px, black -1px 0px 1px;
+    font-size: 25px;
+    color: black;
+    outline: none;
+    border: none;
+    background: #191919;
+    position: relative;
+    width: 95%;
+    height: 20%;
+    box-shadow: 0px 0px 2px 1px black inset;
+    transition: 0.5s linear;
+    left: 95%;
+}
+
+#chatWindowSettingButton:hover{
+    color: black;
+    text-shadow:0px -1px 1px white, 0px 0px 2px white, 0px 1px 3px white, -1px -1px 0px white, -1px 0px 1px white;
+}
+
+#userPageSettingButton{
+    text-shadow:rgb(0 255 168) 0px 0px 1px, rgb(0 255 168) 0px -1px 1px, black 0px 0px 2px, rgb(0 255 168) 0px 0px 3px, black -4px 1px 10px, black -1px 0px 1px;
+    font-size: 25px;
+    color: black;
+    outline: none;
+    border: none;
+    background: #191919;
+    position: relative;
+    width: 95%;
+    height: 20%;
+    box-shadow: 0px 0px 2px 1px black inset;
+    transition: 0.5s linear;
+    left: -95%;
+}
+
+#userPageSettingButton:hover{
+    color: black;
+    text-shadow:0px -1px 1px white, 0px 0px 2px white, 0px 1px 3px white, -1px -1px 0px white, -1px 0px 1px white;
+
+}
+
+#settingsWindowSettingButton{
+    text-shadow: rgb(0 255 168) 0px 0px 1px, rgb(0 255 168) 0px -1px 1px, black 0px 0px 2px, rgb(0 255 168) 0px 0px 3px, black -4px 1px 10px, black -1px 0px 1px;
+    font-size: 25px;
+    color: black;
+    outline: none;
+    border: none;
+    background: #191919 ;
+    position: relative;
+    width: 95%;
+    height: 22%;
+    box-shadow: 0px 0px 2px 1px black inset;
+    border-bottom-left-radius: 10px;
+    transition: 0.5s linear;
+    left: 95%;
+}
+
+#settingsWindowSettingButton:hover{
+    color: black;
+    text-shadow:0px -1px 1px white, 0px 0px 2px white, 0px 1px 3px white, -1px -1px 0px white, -1px 0px 1px white;
+}
+
+.rangeWrapper{
+    position: relative;
+    left: -5%;
+    display: block;
+    margin-top: 15px;
+    width:50%;
+    height:40px;
+    box-shadow: 0px 0px 3px 1px #292929 inset, 0px 0px 8px -1px black;
+    /*background: linear-gradient(to left, white, black);*/
+    border-radius: 15px;
+    /*border: 2px solid #ff0023;*/
+}
+
+
+.imagess{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.inputs{
+    -webkit-appearance: none;
+    position: relative;
+transition: 1.1s ease-in-out;
+    width: 215px;
+    height: 10px;
+    top: 0%;
+    overflow:  hidden;
+    z-index: 2;
+    box-shadow:/*0 0 2px 2px #00ff50, 0 0 3px 3px #00ff5d inset;*/
+            0 0 2px 2px #00ff50, 0 0 2px 2px #00ff5d inset;
+    /*0 0 8px 0px #065b18f5, 0 0 6px 2px #00ff5d inset, 0px 1px 8px 1px #124c32d6
+    /*transition:0.6s linear;*/
+    font-family: "Comfortaa", sans-serif;
+    background: black;
+    outline: none;
+    border-radius: 20px;
+}
+
+.inputs::-webkit-slider-thumb {
+transition: 1.7s linear;
+    -webkit-appearance: none;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(0, 255, 160, 0.97);
+    cursor: pointer;
+    border: 1px solid white;
+    box-shadow:  rgba(255, 255, 255, 0.98) inset 0px 0px 2px 0px,0px 0px 5px  2px #000000,0px 0px 70px  50px black   ;
+    /*border: 3px solid white*/
+}
+
+.inputs::-webkit-slider-thumb:hover{
+    background: white;
+    box-shadow:  rgba(255, 255, 255, 0.98) inset 0px 0px 2px 0px,0px 0px 6px  3px white,0px 0px 70px  50px black   ;
+}
+
+    .rangeOptions{
+
+    width: 96%;
+    height: 80%;
+    position: relative;
+    left: 2%;
+    top: 11%;
+background: linear-gradient(45deg, #000000bd, #5e5e5eb0);
+    border-radius: 10px;
+    transition: 0.7s ease-in-out;
+
+    box-shadow: 0px 0px 1px 2px #000000, 0px 0px 3px 1px inset;
+    overflow: hidden;
+}
+
+
+.options{
+    overflow: hidden;
+    outline: none;
+    -webkit-appearance: none;
+    position: relative;
+    height: 7px;
+    width: 90%;
+    margin: 0;
+    padding: 0;
+    background: black;
+    box-shadow: 0px 0px 2px 1px #00ff5d, inset 0px 0px 2px 1px #00ff5d;
+    border-radius: 10px;
+    transition: 5.3s ease-in-out;
+
+
+
+}
+
+.options:hover{
+    /*box-shadow: 0px 0px 3px 1px purple;*/
+}
+.options::-webkit-slider-thumb {
+    transition: 5.2s    ;
+
+    -webkit-appearance: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 40%;
+    background: black;
+    cursor: pointer;
+    border: 0px solid black;
+    box-shadow:  rgba(243, 77, 0, 0.98) inset 0px 0px 3px 1px,0px 0px 1px  1px #ffffff,0px 0px 20px 15px black;
+    /*border: 3px solid white*/
+}
+
+.rangeColors{
+    width: 50px;
+    height:  50px;
+    position: absolute;
+    left: -170%;
+    top: -17%;
+    border: 55px solid rgba(0, 0, 0, 0);
+    overflow: hidden;
+
+
+}
+
+
+
+.colorWrapper{
+    cursor: default;
+    position: absolute;
+    overflow: hidden;
+    width: 10%;
+    height: 45%;
+    border-radius: 50%;
+    margin-top: 17%;
+    margin-left: 120%;
+    top: -75%;
+    box-shadow: 0px 0px 3px 1px #f60228;
+border: 2px solid rgba(0, 0, 0, 0.22)
+}
+
+#cubePane{
+    overflow: hidden;
+    position: absolute;
+    z-index: 2;
+    top: 10%;
+    left: 100%;
+    width: 29%;
+    height: 35%;
+    transition: 0.7s ease-in-out;
+    background: linear-gradient(to right, #b1b1b100, #ffffff3b);
+    border: 1px solid crimson;
+    border-radius: 15px;
+    box-shadow: inset crimson 0px 0px 1px 1px;
+}
+
+.sideBackgroundImage{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    box-shadow: 0px 0px 11px 1px #d5d5d5, 0px 0px 3px 2px inset white;
+    background: linear-gradient(to top, #d6d6d621, black);
+    border: 1px solid #ffffff;
+    left: -35%;
+    top: 50%;
+    float: left;
+    overflow: hidden;
+}
+
+
+
+#chatPane{
+    position: absolute;
+    z-index: 2;
+    top: 24%;
+    left: 100%;
+    width: 35%;
+    height: 35%;
+    transition: 0.7s ease-in-out;
+    background: linear-gradient(to right, transparent, black);
+    border: 1px solid crimson;
+    border-radius: 15px;
+    box-shadow: inset crimson 0px 0px 1px 1px;
+}
+
+#userPagePane{
+    position: absolute;
+    z-index: 2;
+    top: 31%;
+    left: 100%;
+    width: 35%;
+    height: 35%;
+    transition: 0.7s ease-in-out;
+    background: linear-gradient(to right, transparent, black);
+    border: 1px solid crimson;
+    border-radius: 15px;
+    box-shadow: inset crimson 0px 0px 1px 1px;
+}
+
+
+#cube-sides-selector{
+
+    position: relative;
+    top: 83%;
+    left: -7%;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #0bffdf;
+    border-radius: 50%;
+    box-shadow: 0px 0px 73px 12px #0bffdf, inset 0px 0px 73px 12px rgba(11, 255, 223, 0.41);
+    transform: rotate(-101deg);
+    transition: 0.5s ease-in-out;
+
+}
+
+.selectors{
+
+    position: absolute;
+    transform-origin: center right;
+    float: left;
+    transform: rotate3d(-5, -5, -18, 70deg);
+    caret-color: rgba(0, 0, 0, 0);
+
+}
+
+.selectors:hover{
+    color: white;
+    text-shadow: 0px 0px 3px white, 0px 0px 2px white;
+}
+
+
+.sides-setting-wrapper{
+    position: absolute;
+    width: 90%;
+    height: 16%;
+    display: block;
+    opacity: 0%;
+    border: 0px solid rgba(0, 0, 0, 0.51);
+    left: 165%;
+    top: 1%;
+    transition: 1s ease-in-out;
+}
+
+
+
+#playerPane{
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    top: 17%;
+    left: 115%;
+    width: 35%;
+    height: 35%;
+    transition: 0.7s ease-in-out;
+    background: linear-gradient(to right, transparent, black);
+    border: 1px solid crimson;
+    border-radius: 15px;
+    box-shadow: inset crimson 0px 0px 1px 1px;
+}
+
+.audioWaveColorWraper{
+    z-index: 3;
+    position: absolute;
+    width: 13%;
+    height: 78%;
+    margin: 15px;
+    top: -10px;
+    left: 15px;
+    box-shadow: 0px 0px 3px 1px #f60228;
+    padding: 0px;
+    border-radius: 10%;
+    border: 2px solid #7a7c7f;
+    overflow: hidden;
+}
+
+.audioWaveWraper{
+    position: relative;
+    display: block;
+    width: 90%;
+    height: 18%;
+    border: 1px solid red;
+}
+
+.waveColors{
+    opacity: 5%;
+    z-index: 3;
+    position: absolute;
+    width: 85px;
+    height: 90px;
+    overflow: hidden;
+    left: -10%;
+    top: -35%;
+}
+
+
+.bars1{
+    box-shadow: 0px 0px 0px 0px ;
+
+    border-radius: 15px;
+    position: relative;
+    width: 5px;
+    height: 3px;
+    background: red ;
+    float: left;
+    margin: 2px;
+    animation:4.5s barsFrames  ease-in-out infinite;
+}
+
+
+ .bars3{
+    box-shadow: 0px 0px 0px 0px ;
+
+    border-radius: 15px;
+    position: relative;
+    width: 5px;
+    height: 3px;
+    background: red ;
+    float: left;
+    margin: 2px;
+    animation:4.5s barsFrames  ease-in-out infinite;
+
+}
+
+.bars2{
+    box-shadow: 0px 0px 0px 0px ;
+
+    border-radius: 15px;
+    position: relative;
+    width: 5px;
+    height: 3px;
+    background: #00ffae;
+    float: left;
+    margin: 2px;
+    animation:4.5s barsFrames  ease-in-out infinite;
+
+}
+
+
+
+.bars4{
+
+    box-shadow: 0px 0px 0px 0px ;
+    border-radius: 15px;
+    position: relative;
+    width: 5px;
+    height: 3px;
+    background: #00ffae;
+    float: left;
+    margin: 2px;
+    animation:4.5s barsFrames  ease-in-out infinite;
+
+}
+
+.bars5{
+
+
+    box-shadow: 0px 0px 0px 0px ;
+    border-radius: 15px;
+    position: relative;
+    width: 5px;
+    height: 3px;
+    background: #00ffae;
+    float: left;
+    margin: 2px;
+    animation:4.5s barsFrames  ease-in-out infinite;
+
+}
+
+.bars6{
+
+    box-shadow: 0px 0px 0px 0px ;
+    border-radius: 15px;
+    position: relative;
+    width: 5px;
+    height: 3px;
+    background: #00ffae;
+    float: left;
+    margin: 2px;
+    animation:4.5s barsFrames  ease-in-out infinite;
+}
+
+
+
+#progress{
+   box-shadow:  mediumspringgreen 0px 0px 7px 1px, lightseagreen 0px 0px 17px 0px inset;
+    height: 2px;
+}
+
+.cssEqualizer{
+    opacity: 100%;
+    z-index: 2;
+    top: 0px;
+    transform-style: preserve-3d;
+    left: -10px;
+    transform: rotate(180deg);
+    position: absolute;
+    width: 73px;
+    height: 53px;
+}
+
+@keyframes  barsFrames{
+    0%{height: 30%;}
+    10%{height: 10%;}
+    20%{height: 60%;}
+    30%{height: 10%;}
+    40%{height: 50%;}
+    50%{height: 15%;}
+    60%{height: 35%;}
+    70%{height: 60%;}
+    80%{height: 40%;}
+    100%{height: 20%;}
+}
+
+
+
+#canvas2 {
+	position: relative;
+	width: 100%;
+	height: 60%;
+	top: 80%;
+	filter: blur(2px);
+	transition: 5.1s;
+	transform: skewX(9deg);
+}
+
+#canvas3 {
+	opacity: 100%;
+	position: relative;
+	width: 102%;
+	height: 5%;
+	top: 27%;
+	filter: blur(8px);
+	left: -1%;
+	transform-style: preserve-3d;
+	transform: skewX(12deg);
+
+}
+
+#canvas4 {
+	opacity: 100%;
+	position: relative;
+	width: 100%;
+	height: 5%;
+	top: 51%;
+	left: -6px;
+	z-index: 3;
+	filter: blur(2px);
+	transform: skew(7deg, 0deg) skewX(10deg);
+}
+
+#canvas5{
+	opacity: 100%;
+	position: absolute;
+	width: 103%;
+	height: 100%;
+	/*top: -20px;*/
+	top: 34px;
+	left: -3%;
+	filter: blur(4px);
+	transform-style: preserve-3d;
+	transform: rotate3d(0, 34, -23, 180deg);
+}
+
+#canvas6{
+	opacity: 100%;
+	position: absolute;
+	width: 108%;
+	height: 100%;
+	top: 35px;
+	left: -4%;
+	filter: blur(3px);
+	transform-style: preserve-3d;
+	transform: rotate3d(-1, 34, -24,
+	180deg
+	);
+}
+
+#canvas7{
+	opacity: 100%;
+	position: absolute;
+	width: 110%;
+	height: 141%;
+	top: 25px;
+	left: 0%;
+	filter: blur(8px);
+	transform-style: preserve-3d;
+	transform: rotate3d(-1, 34, -25,
+	180deg
+	);
+}
+
+@keyframes connected {
+	0%{box-shadow: 0px 0px 1px 1px white;}
+	10%{box-shadow: 0px 0px 3px 1px white;}
+	20%{box-shadow: 0px 0px 1px 1px white;}
+	30%{box-shadow: 0px 0px 3px 1px white;}
+	40%{box-shadow: 0px 0px 1px 1px white;}
+	50%{box-shadow: 0px 0px 3px 1px #00ff68;}
+	60%{box-shadow: 0px 0px 1px 1px white;}
+	70%{box-shadow: 0px 0px 3px 1px white;}
+	80%{box-shadow: 0px 0px 1px 1px white;}
+	90%{box-shadow: 0px 0px 3px 1px white;}
+	100%{box-shadow: 0px 0px 1px 1px white;}
+}
+
+@keyframes songnamerun {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+
+@keyframes rotatedisk {
+	0% {transform: rotate(0deg);}
+	50% {transform: rotate(360deg);}
+	100% {transform: rotate(0deg);}
+}
+
+
+@keyframes gradient {
+	0% {background-position: 200% 50%;}
+	50% {background-position: 100% 50%;}
+	80% {background-position: 20% 50%;}
+	100% {background-position: 0% 50%;}
+}
+
+
+.list {
+
+	transition: 0.5s linear;
+	text-shadow: /*3px -1px 0px rgb(1 1 1), 1px 0px 2px #01ffc6, 2px 3px 3px black */ 0px -1px 3px rgb(0 0 0), -1px 0px 1px #01ffc6, -2px 0px 2px #000000, -3px 1px 1px black;
+
+	font-family: 'Comfortaa', monospace;
+	color: #00ff68;
+	white-space: nowrap;
+	overflow: hidden;
+	transform-origin: right center;
+	font-size: 21px;
+	width: 150px;
+	height: 20px;
+	position: absolute;
+}
+
+
+.list:hover {cursor: pointer;color: white;text-shadow: 0px 0px 2px white, 1px 1px 2px white, 1px 0px 2px white;}
+.newElem {box-shadow: black 0px 0px 3px 1px inset;}
+.newElem:hover {box-shadow: inset white 0px 0px 3px 1px;}
+
+
+.track {
+	text-shadow: 1px 1px 1px black, -1px -1px 1px black;
+	color: white;
+	font-size: 17px;
+	transform-origin: 0% 120%;
+	left: 320px;
+	padding: 5px;
+	position: absolute;
+	width: 50%;
+	margin-left: 3px;
+	height: 20%;
+
+}
+
+
+#audioHolder {
+	display: none;
+	top: 20%;
+	position: absolute;
+	background: white;
+	height: 150px;
+	width: 610px;
+}
+
+#audioBox {
+
+	border-radius: 10px;
+	top: 30%;
+	height: 80px;
+	position: relative;
+	background: linear-gradient(red, black);
+	color: white;
+}
+
+
+#volume {
+	position: relative;
+	z-index: 6;
+	top: 0%;
+	left: 49%;
+	opacity: 100%;
+	width: 10px;
+	height: 19px;
+	transform: rotate3d(0, 0, 1, 90deg) translate3d(247px, 48px, 99px);
+
+	box-shadow: 0px 0px 10px 2px white;
+	transition: 1s ease-in-out;
+	border-radius: 10px;
+
+}
+
+
+.wraper {background-position: center;
+	position: absolute;
+	left: 29%;
+	top: 24%;
+	z-index: 5;
+	transition: 1.5s linear;
+	width: 425px;
+	height: 470px;
+	perspective: 600px;
+	border-radius: 240px;
+	overflow: hidden;
+}
+
+
+@keyframes rotateBackward {
+	0% {transform: rotateZ(175deg) rotateY(227deg) rotateX(-45deg);}
+	50% {transform: rotateZ(175deg) rotateY(227deg) rotateX(-65deg);}
+	100% {transform: rotateZ(175deg) rotateY(227deg) rotateX(-45deg);}
+}
+
+@keyframes wraperShadowChange {
+	0% {box-shadow: rgb(49, 239, 109) -3px 1px 0px -2px, rgb(2, 239, 160) 0px 2px 6px 1px inset;}
+	50% {box-shadow: rgb(49, 239, 109) -3px 1px 0px 1px, rgb(2, 239, 160) 0px 2px 6px 1px inset;}
+	100% {box-shadow: rgb(49, 239, 109) -3px 1px 0px 4px, rgb(2, 239, 160) 0px 2px 6px 1px inset;}
+}
+
+
+@keyframes rotateForward {
+	0% {transform: rotateZ(175deg) rotateY(227deg) rotateX(-45deg);text-shadow: 0px 0px 0px red;box-shadow: 0px 0px 0px 0px white;}
+	50% {transform: rotateZ(175deg) rotateY(227deg) rotateX(-25deg);text-shadow: 2px 1px 30px yellow;box-shadow: 0px 0px 5px 13px white;}
+	100% {transform: rotateZ(175deg) rotateY(227deg) rotateX(-45deg);text-shadow: 0px 0px 0px red;box-shadow: 0px 0px 0px 0px white;}
+}
+
+@keyframes indicateOnScroll {
+	0% {text-shadow: 0px 0px 0px red;box-shadow: black 0px 0px 5px 5px inset, black 0px 0px 10px 6px;border: white 2px solid;}
+	50% {text-shadow: 2px 1px 30px yellow;box-shadow: black 0px 0px 5px 5px inset, white 0px 0px 10px 6px;border: #f60228 1px solid;}
+	100% {text-shadow: 0px 0px 0px red;box-shadow: black 0px 0px 5px 5px inset, white 0px 0px 10px 6px;border: white 2px solid;}
+}
+
+
+@keyframes brightCube { 0% {border: 3px solid green;} 50% {border: 9px solid white;} 100% {border: 3px solid green;} }
+
+@keyframes elemBlockRotate { from {transform: rotate(360deg); z-index: 1} to {transform: rotate(0deg); z-index: 5} }
+
+
+.cube {
+	top: 50%;
+	left: 40%;
+	animation: rotateCube 180s linear infinite;
+	position: absolute;
+	width: 55px;
+	height: 55px;
+	transition: 1.2s linear;
+	transform-style: preserve-3d;
+	transform: rotate3d(0,0,0,0deg);
+}
+
+
+
+.side {
+	text-shadow: 1px -1px 0px rgb(0 0 0), 1px 0px 2px #169bff, 2px 3px 1px #000000;
+	box-shadow: black 0px 0px 5px 5px inset, black 0px 0px 10px 6px,/*rgb(20, 230, 150) 0px 0px 2px 0px inset, black 0px 0px 2px 2px ; */ /* rgb(20, 230, 150) 0px 0px 5px 1px inset, black 0px 0px 2px 7px; */ /*rgb(20, 230, 150) 0px 0px 2px 1px inset, black 0px 0px 2px 2px ; */ /*#000000 0px 0px 0px 3px, #08ffd1 0px 0px 5px 8px inset;*/  /*black 0px 0px 5px 5px inset, black 0px 0px 9px 2px;*/
+		/*rgb(20, 230, 150) 0px 0px 2px 0px inset, black 0px 0px 2px 2px ; */ /* rgb(20, 230, 150) 0px 0px 5px 1px inset, black 0px 0px 2px 7px; */ /*rgb(20, 230, 150) 0px 0px 2px 1px inset, black 0px 0px 2px 2px ; */ /*#000000 0px 0px 0px 3px, #08ffd1 0px 0px 2px 3px inset;*//*rgb(20, 230, 150) 0px 0px 2px 0px inset, black 0px 0px 2px 2px ; */ /* rgb(20, 230, 150) 0px 0px 5px 1px inset, black 0px 0px 2px 7px; */ /*rgb(20, 230, 150) 0px 0px 2px 1px inset, black 0px 0px 2px 2px ; */ /*#000000 0px 0px 0px 3px, #08ffd1 0px 0px 5px 8px inset;*/black 0px 0px 3px 2px inset, black 0px 0px 2px 2px, 0px 0px 4px 3px inset #9c27b0;
+	border: 3px solid rgb(20, 230, 150);
+	border-radius: 11px;
+	outline: none;
+	position: absolute;
+	opacity: 100%;
+	height: 65px;
+	color: rgb(0, 218, 253);;
+	width: 65px;
+	text-align: center;
+	font-weight: bolder;
+	background: url("7z9m.gif");/*MPAw   F6VQ  7zn2    HCMd   AGiu   cFv  7ZN2  SImg    930Z   XaUj  3kvd   A44T   9LId  9viJ   ElI8   7rg   2MdY   7Z9m   TnYr   PAM   Nxh6   7Z9m    QFno  Zi9B   IxN  gyp  slt   PAA   8fvm  1zLU   SlJB  VJl  SlJO   2eRd   K6XH  P7UA   TIQo  SdGh*/
+	/*background: linear-gradient(45deg, #00000017, #000000);*/
+}
+
+.front {transition: 1.3s linear;transform: translateZ(34px);}
+.right {text-shadow: 0px 0px 3px 5px #00ebff85;transform: translateX(34px) rotateY(90deg);transition: 1.4s linear;}
+.left {transform: rotateY(-90deg) translateZ(34px); transition: 1.2s ease-in-out; overflow: hidden}
+.top {transform: rotateX(90deg) translateZ(-34px); transition: 1.9s ease-out;}
+.bottom {transform: rotateX(-90deg) translateZ(-34px);transition: 1s linear;}
+.back {transform: translateZ(-34px);transition: 2.2s ease-in-out;}
+
+#s4 {transition: 5.2s ease-in-out;animation: rotateCube 3s linear infinite;overflow: hidden;}
+
+
+
+
+</style>
+</head>
+<body>
+
+
+
+<canvas id="canvas4">
+    </canvas>
+
+    <div class="avatar" >
+    <img src="ava.png" style="left:10%; top: 10%; position: relative;" alt="">
+
+    <form class="avatar-upload-form" enctype="multipart/form-data" method="post" action="uploadservlet">
+
+    <label for="choose-file-button"  style="position: relative; left: 45%" ><i class="fa fa-refresh"></i> </label>
+
+<input type="file" accept="image/*" id="choose-file-button" onclick="lbl()" >
+
+    <input type="submit" value="send photo" id="submit_button" name="picss" style=" display: none">
+
+    <label for="submit_button" id="lbl"><i class="fa fa-upload" style="position: relative; display: none"></i> </label>
+
+</form>
+</div>
+    <button id="status"  ><i id="off" class="fa fa-power-off" style="top: -3%; left: -21%; position: relative; color: red;"></i></button>
+<div id="chat-wraper">
+<!--    <div id="perspective" style="perspective: 1000px; position: relative; width: 100%; height: 100%">-->
+    <div id="users-online" readonly="readonly" contenteditable="false"></div>
+
+<!--    <div class="chat-box" id="chat-box" readonly="readonly" contenteditable="false"></div>-->
+<!--    </div>-->
+</div>
+
+
+
+
+
+
+
+<div  id="canWraper" style="z-index: 3;box-shadow: black 0px -106px 84px -84px inset; overflow: hidden;  position:relative; width:102%; height:10%; filter: blur(1px); float: left; top: 49%; left:-1%; transition: 5.5s linear;   transform: rotateX(-180deg);" >
+
+    <canvas id="canvas2"></canvas>
+
+</div>
+
+<div id="messageBlock">
+    <input id="message" type="text" style="/* background: linear-gradient(to right, #00000091,#00000030); */position: relative;float: left;" minlength="1" >
+    <text id="u">You </text>
+    <button id="sendButton"><i class="fa fa-envelope"></i></button>
+</div>
+
+
+
+    <canvas id="canvas" style=" display: none; position:relative; transform: rotateY(180deg)"></canvas>
+
+
+
+    <!--
+    <div id="large-header" class="large-header" style="background-image: url(cxz.jpg); filter: blur(1px);">
+
+    </div> -->
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+src="http://localhost:8080/restweb/dynamic/sounds/music/Smare-TurnupTonight.mp3" crossOrigin = "anonymous"
+    <script src="demo-2.js"></script>  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+    <audio id="audio3" src="" hidden></audio>
+
+
+<!-- div id="audioHolder">
+    <div id="audioBox">
+
+
+    <button id="muteButton" style="left: 	30%; width: 30px; height: 20px; background-color: 	white; position: 	relative;	"><i class="fa fa-stop"></i> </button>
+<div id="volumeBar" style="width:700px; height: 15px; background: purple; padding: 	2px;">
+    <div id="volumeP" style="width:0px; height: 12px; background: linear-gradient(to right   ,black,pink, purple, #f60228); padding: 3px; border-radius: 12px;"></div>
+    </div>
+    </div>
+    </div>
+
+
+    </div> -->
+
+
+    <canvas id="canvas3">
+    </canvas>
+
+    <div id="progressBar" style="transition: 1s ease-in-out;position: 	absolute;width: 103%;z-index: 3;top: 53%;left: -1%;height: 6px;border-radius:10px;padding: 2px;box-shadow: 0px 0px 2px 1px #000000b3, 0px -1px 5px 4px #0d0d0d inset; ">
+
+
+    <div id="progress" style=" width: 0%; position: relative;  top: 32%; border-radius: 15px;">
+
+    </div>
+    </div>	        <!-- width: 394px; height: 330px; left:31%; top: 34%;   transform: skew(30deg, -32deg) -->
+
+
+    <div class="wraper" id="wraper">
+
+        <div id="centertimebar"
+             style="overflow: hidden; position: relative;	 box-shadow: 	rgb(255 255 255) 0px 0px 2px 2px, rgb(255 255 255) 0px 0px 5px 0px inset; width: 154px; height: 23px; left: 161%; top: 52%; transition: 2.5s ease-in-out; border-radius: 4px; border: white; background:rgb(12 13 12);">
+
+            <div id="timeBox"
+                 style="top: -20%; left: 25%; position: relative; width: 192px; border-radius: 2px; height: 40px; font-family: 'Iceland', cursive; color: rgb(183, 254, 16);  font-size: 31px;  text-shadow:0px 1px 3px, rgb(1 2 0) 1px 1px 5px, black 1px 1px 1px, 0px 1px 1px; transition: 3.2s ease-in-out; overflow: hidden;    z-index: 4;">
+                00:00/00:00
+            </div>
+
+
+        </div>
+
+        <div id="screenwraper"
+             style="transition: 1.5s ease-in-out; left: 9px;  overflow: hidden; float: left;width: 211px;height: 421px;position: relative;top: 22px;">
+
+            <div id="screen1block" style="
+overflow: hidden;
+left: 16px;
+top: 6px;
+position: relative;
+width: 202px;
+height: 201px;
+box-shadow:rgb(243 243 243 / 93%) -1px 1px 7px 0px inset, rgb(7 7 7) 0px 29px 64px -4px inset;
+border-radius: 	228px 10px 14px 10px;
+transition: 1s ease-in-out;
+transform: translate(199px, -13px) rotate(90deg); background: 	radial-gradient(black, #00ffd230);
+">
+
+
+                <div id="screen"
+                     style="transition: 3s ease-in-out;   position: relative; width: 197px; height: 196px; transform:translate(406px, -104px) rotate(90deg); background: rgba(0, 0, 0, 0.54); top: 109px; left: -212px; box-shadow:rgb(49, 239, 109) -3px 1px 0px -2px, rgb(2, 239, 160) 0px 2px 6px 0px inset; border-top-left-radius: 215px; border-top-right-radius: 20px;  border-bottom-right-radius: 19px; border-bottom-left-radius: 14px"></div>
+
+                <div class="unhovered2" id="playlist"
+                     style="transition: all 1.5s linear 0s;top: 0px;margin: 0px;position: relative;transform:  rotate(0deg);left: 0px;width: 391px;height: 391px;border-radius: 304px;">
+
+                    <div class="list" id="track1" style=" width: 150px; height: 15px; ">!st Track - Artist</div>
+
+                    <div class="list" id="track2" style=" width: 150px; height: 15px;">!st Track - Artist</div>
+
+                    <div class="list" id="track3" style="width: 150px;height: 15px;"></div>
+
+
+
+                    <div class="list" id="track4" style="">!st Track - Artist</div>
+
+                    <div class="list" id="track5" style="">!st Track - Artist</div>
+
+                    <div class="list" id="track6" style="">!st Track - Artist</div>
+
+                    <div class="list" id="track7" style="" onclick="xxx()">!st Track - Artist</div>
+
+                    <div class="list" id="track8" style="">!st Track - Artist</div>
+
+
+                    <div class="list" id="track10" style="">!st Track - Artist</div>
+
+                    <div class="list" id="track11" style="">!st Track - Artist</div>
+
+                    <div class="list" id="track12" style="">!st Track - Artist</div>
+
+                </div>
+            </div>
+
+
+            <div id="screen2block"
+                 style="overflow: hidden;	 transform: translate(199px, -13px) rotate(-90deg);transition: 1s ease-in-out;position: relative;width: 202px;height: 201px;top: 12px; left: 16px;box-shadow: 0px 0px 9px 8px #070707fc inset;border-top-left-radius: 16px;border-bottom-right-radius: 14px;background: radial-gradient(black, #00ffd230); border-bottom-left-radius: 248px;border-top-right-radius: 20px;">
+                <div id="screen2"
+                     style="border: 3px solid white; transition: 1s ease-in-out;  transform:    translate(0px, -8px) rotate(-180deg); position: relative; width: 197px; height: 196px; background:rgb(0 0 0 / 11%); top: 1px; left: -1px; transform-origin:100% 0%; box-shadow:rgb(255 255 255) 121px 18px 33px 26px, rgb(255 255 255 / 100%) 25px -14px 11px -26px inset; border-radius: 16px 35px 0px 425px;  "></div>
+
+
+                <div id="playlistwraper"
+                     style="overflow:hidden;position: 	absolute;width: 207px;height: 234px;left: -10px;transform: skewY(-1deg);top: -10px;top: -3px;top: -1px;top: 6px;">
+                    <div class="unhovered" id="playlist1"
+                         style="transition:  1.5s linear;top: -208px;/* transform: skew(14deg, 10deg); */margin: 0px;position: relative;transform: rotate(126deg) translate(5px, 2px);/* left: -7;left: 11px;;;left: 12px;;;;*/left: 19px;left: 19px;width: 400px;height: 391px;border-radius: 304px;">
+
+                        <div class="list" id="tracx1"
+                             style="margin: 	2px;border-radius: 8px;position: relative;font-size: 22px;left: 3px;height: 25px;position: absolute;width: 197px;top: 3px;left: -3%;z-index: 56;transform-origin: 100% 0%;transform: rotate(82deg) translate(192px, 19px);">
+                            !st Track - Artist
+                        </div>
+
+                        <div class="list" id="tracx2"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 203px;left: 50%;transform: rotate(68deg) translate(111px, 263px);font-size: 22px;transform-origin: 100% 0%;">
+                            !st Track - Artist
+                        </div>
+
+
+                        <div class="list" id="tracx3"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 203px;left: 50%;transform: rotate(54deg) translate(20px, 263px);font-size: 22px;transform-origin: 100% 0%;text-shadow: -2px;">
+                            !st Track - Artist
+                        </div>
+
+
+                        <div class="list" id="tracx4"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 205px;left: 20%;box-shadow: none;font-size: 22px;transform-origin: 100% 0%;transform: rotate(41deg) translate(29px, 163px);">
+                            !st Track - Artist
+                        </div>
+
+                        <div class="list" id="tracx5"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 205px;left: 20%;box-shadow: none;font-size: 22px;transform-origin: 0% 100%;transform: rotate(27deg) translate(-69px, 29px);">
+                            !st Track - Artist
+                        </div>
+
+
+
+                        <div class="list" id="tracx6"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 205px;left: 20%;box-shadow: none;font-size: 22px;transform-origin: 0% 100%;transform: rotate(-5deg) translate(-91px, 34px);">
+                            !st Track - Artist
+                        </div>
+
+
+                        <div class="list" id="tracx7"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 205px;transform: translate(3px, 59px) rotate(-19deg);box-shadow: none;font-size: 22px;transform-origin: 0% 100%;">
+                            !st Track - Artist
+                        </div>
+
+                        <div class="list" id="tracx8"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 10px;width: 100px;left: 87%;box-shadow: none;font-size: 22px;transform-origin: 0% 100%;"></div>
+
+
+                        <div class="list" id="tracx9"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 205px;left: 20%;box-shadow: none;font-size: 22px;transform-origin: 0% 100%;transform: rotate(-34deg) translate(-77px, 25px);">
+                            !st Track - Artist
+                        </div>
+
+
+                        <div class="list" id="tracx10"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 205px;left: 20%;box-shadow: none;font-size: 22px;transform-origin: 0% 100%;transform: rotate(-47deg) translate(-63px, 33px);">
+                            !st Track - Artist
+                        </div>
+
+
+                        <div class="list" id="tracx11"
+                             style="margin: 	2px;border-radius: 8px;position: relative;height: 25px;width: 205px;left: 20%;box-shadow: none;font-size: 22px;transform-origin: 0% 100%;transform: rotate(-61deg) translate(-48px, 51px);">
+                            !st Track - Artist
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div id="line"
+             style="position: relative	; background: white; height: 0px; transition: 	1s linear; top: 50%;	left: 	49%; z-index: 3; width: 1px;  box-shadow: white 0px 0px 4px 2px;"></div>
+
+        <div id="circle-wraper"
+             style="overflow: hidden; z-index: -6;  border-radius: 10px; position: absolute; height: 85%; width: 64%; left: 53%; top: 12%; transform: rotate(-180deg);">
+
+            <div id="circleblock"
+                 style="transition: 1.2s linear; position: relative; height: 94%; width: 143%; box-shadow:/*rgb(5 69 216 / 0%) 0px 0px 4px 5px, rgb(0 0 0 / 77%) 0px 0px 9px 8px inset; border:4px solid #00000096*/ rgb(55 17 255 / 23%) 0px 0px 6px 4px, rgb(0 0 0 / 75%) 0px 0px 9px 8px inset; top: 14px; left: 280px; border-radius: 190px; overflow: hidden; ">
+
+                <div id="circle"
+                     style="float: left; background:url('e.png') -263% -26%, url('e.png') -8% -38%,url('e.png') 57% 17%, url('e.png') -55% 85%, url('e.png') 39% 97%; transition: 1.4s ease-in-out; left: 280px; top: 6%; position: relative; width: 85%; height: 85%; border-radius: 290px;border:9px solid rgb(255 87 34 / 7%); transform: rotate3d(10px, 10px, 10px, 136deg) translateX(0px); box-shadow:rgb(13 255 246) 0px 0px 2px 2px, rgb(0 0 0) 0px 0px 10px 7px inset, rgb(41 14 27 / 19%) 0px 0px 10px 14px; position: relative;">
+
+                    <div id="circle-middle"
+                         style="position: relative; width: 25%; height: 25%; border-radius: 55px; border:2px solid #000000; left: -3px; box-shadow:#00ffa2 0px 0px 2px 3px, inset #00dab3 0px 0px 1px 2px; top: 37%; left: 37%; ">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="elemBlock" style="position: absolute;  width: 491px; height: 437px; left:27%; top: 231px; border-radius: 518px; text-shadow:rgb(0 0 0 / 69%) 1px -1px 2px, rgb(0 0 0 / 69%) -1px -2px 4px, rgb(0 0 0 / 1%) 2px -4px 3px, rgb(0 255 175 / 49%) -1px 36px 1px, rgb(6 189 209 / 58%) -2px 1px 2px, rgb(0 0 0 / 43%) 2px -1px 3px;  font-size: 19px;  font-family: Comfortaa, cursive; color: rgb(57 220 199);  " ></div>
+
+    <div class="cube" id="cube" style="z-index: 5">
+
+    <button class="side front" id="front" ><i class="fa fa-forward" style="font-size: 15px;"></i></button>
+<!--
+<input type="range" id="volume"  min="0" max="100"  value="100" step="2" style="z-index: 1111"> -->
+    <button class="side back" id="back" ></button>
+
+        <button class="side right" id="right" ><canvas id="canvas8" style="opacity:100%; position: absolute; width:187%; height:189%;top: -52px; left: -40%;   filter: blur(7px);  transform-style: preserve-3d; transform:rotate3d(16, -1, 24, 178deg)"></canvas></button>
+
+    <button class="side left" id="left"><i class="fa fa-play" style="font-size: 15px;" id="play"></i><canvas id="canvas7" style="opacity:100%; position: absolute; width:255%; height:221%;top: -67px; left: -126%;   filter: blur(2px);  transform-style: preserve-3d; transform:rotate3d(-18, 9, 90, 144deg)"></canvas></button>
+
+        <button class="side top" id="topp" ><canvas id="canvas5" style="opacity:100%; position: absolute; width:100%; height: 100%;top: 35px; left: -40%;   filter: blur(8px);  transform-style: preserve-3d; transform:rotate3d(-1, 34, -23, 180deg)"></canvas></button>
+
+    <button class="side bottom" id="bottom" ><i class="fa fa-backward" style="font-size: 15px"></i></button>
+
+
+    <button class="side s2" id="s2" style="  transform: translate3d(3px, 4px, 3px); display: none;  box-shadow: 0 0 0 0;transition: 0.8s linear;  opacity: 90%;"></button>
+
+    <button class="side s3" id="s3" style="  box-shadow: 0 0 0 0; display: none;  opacity: 90%;transition: 0.7s linear; "><i class="fa fa-music" style="font-size: 15px;"></i></button>
+
+    <button class="side s4" id="s4" style="transition:linear 0.8s; display: none;  width:  10px; height:   inherit;     box-shadow: 0px 0px 0px 0px inset white;opacity: 90%;"><i class="fa fa-music" style="font-size: 15px"></i></button>
+
+
+<div class="side s5" id="s5" style=" box-shadow: #fff80045 0px 0px 4px 2px, #23d3f1 0px 0px 1px 1px, 0px -0px 4px 2px #0070ff; border: 1px solid white;border-radius: 13px; color: #ffffff; transform:translate3d(60px,133px, 130px) rotate3d(409, -339, 28, -255deg); opacity: 90%; background: #e15b32ba; width: 0px; height: 0px; border: 1px solid white"></div>
+
+    <div class="side s6" id="s6" style="box-shadow: #fff80045 0px 0px 3px 1px, #23d3f1 0px 0px 1px 1px, 0px -0px 3px 2px #0070ff; color: #ffffff; transform: translate3d(-49px,-65px, -39px) rotate3d(-14, 86, -10, 178deg);opacity: 90%; background: #e15b32ba; width: 0px; height: 0px; border: 2px solid; border-radius: 13px;"></div>
+
+    <div class="side s7" id="s7" style="box-shadow: #fff80045 0px 0px 4px 2px, #23d3f1 0px 0px 1px 1px, 0px -0px 3px 3px #0070ff;  transform: translate3d(103px, 125px, -104px) rotate3d(259, 162, 79, -231deg);opacity: 90%; background: #e15b32ba; width: 0px; height: 0px; border: 2px solid; border-radius: 13px; border-radius: 7px"></div>
+        <canvas id="canvas6" style="opacity:100%; position: absolute; width:100%; height: 140%;top: 27px; left: 0%;   filter: blur(2px);  transform-style: preserve-3d; transform:translate3d(103px, 125px, -104px) rotate3d(90, 68, 74, 163deg)"></canvas>
+    </div>
+
+<!--
+    <div id="xz" style="position: absolute;	bottom: 5%; width: 150px">
+    <input type="file"  accept="audio/*" id="thefile2" style="position: absolute	; width: 140px; /*height: 40px */">
+-->
+    <button id="gear-button"><i class="fa fa-gear" style="color: #00c0d7; text-shadow: 0px 0px 3px black,-1px -1px 2px black"></i></button>
+<button id="scroll-up"><i class="fa fa-arrow-circle-o-up"></i></button>
+
+    <div id="settingsWindow">
+        <div class="icons-container">
+            <button id="cubeSettingButton"><i class="fa fa-cube"></i></button>
+            <button id="equalizerSettingButton"><i class="fa fa-music"></i></button>
+            <button id="chatWindowSettingButton"><i class="fa fa-envelope"></i> </button>
+            <button id="userPageSettingButton"><i class="fa fa-user"></i></button>
+            <button id="settingsWindowSettingButton"><i class="fa fa-gear"></i></button>
+        </div>
+    </div>
+
+    <div id="cubePane">
+
+<!--        <div class="sideBackgroundImage">-->
+
+<!--        </div>-->
+
+
+        <div id="cube-sides-selector">
+            <div class="selectors" id="frontSideSelector" style="transform: rotate3d(5, -14, -93, 88deg) translate(79px, -8px);color: lawngreen;">front</div>
+            <div class="selectors" id="backSideSelector"  style="transform: rotate3d(-6, -3, -25, 73deg) translate(76px, 8px);color: lawngreen;">back</div>
+            <div class="selectors" id="leftSideSelector" style="transform: rotate3d(-5, 3, -48, 52deg) translate(79px, 16px);color: lawngreen;">left</div>
+            <div class="selectors" id="rightStyleSelector" style="transform: rotate3d(-5, 3, -48, 38deg) translate(87px, 17px);color: lawngreen;">right</div>
+            <div class="selectors" id="toppSideSelector" style="transform: rotate3d(-5, 3, -48, 17deg) translate(93px, 25px);color: lawngreen;">topp</div>
+            <div class="selectors" id="bottomStyleSelector" style="transform: rotate3d(-1, 3, -48, -2deg) translate(103px, 22px);color: lawngreen;">bottom</div>
+        </div>
+
+<!-------------------------------------------------------->
+
+                <div id="left-side-setting" class="sides-setting-wrapper">
+                    <div class="sideBackgroundImage"><img src="" class="imagess"></div>
+
+                    <div class="rangeWrapper">
+                        <div class="rangeOptions">
+                            <input type="range" id="leftBorder" class="inputs" min="0" max="15" value="3" step="1">
+                        </div>
+
+                        <div class="colorWrapper" id="leftBorderColorWraper">
+                            <input type="color" id="leftBorderColor" class="rangeColors">
+                        </div>
+                    </div>
+
+
+                    <div class="rangeWrapper">
+                        <div class="rangeOptions" id="leftShadow1Options">
+                            <input id="leftShadow1Blur" class="options"  type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                            <input type="range" id="leftShadow1" class="inputs" min="0" max="15" value="3" step="1">
+                            <input id="leftShadow1Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                        </div>
+
+                        <div class="colorWrapper" id="leftShadow1ColorWraper">
+                            <input type="color" id="leftShadow1Color" class="rangeColors">
+                        </div>
+                    </div>
+
+
+                    <div class="rangeWrapper">
+                        <div class="rangeOptions" id="leftShadow2Options">
+                            <input id="leftShadow2Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                            <input type="range" id="leftShadow2" class="inputs" min="0" max="15" value="0" step="1">
+                            <input id="leftShadow2Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                        </div>
+
+                        <div class="colorWrapper" id="leftShadow2ColorWraper">
+                            <input type="color" id="leftShadow2Color" class="rangeColors">
+                        </div>
+                    </div>
+
+
+                    <div class="rangeWrapper">
+
+                        <div class="rangeOptions" id="leftShadow3Options">
+
+                            <input id="leftShadow3Blur" class="options" type="range" min="0" max="6" style="top: -20px; left: -50%" >
+                            <input type="range" id="leftShadow3" class="inputs" min="0" max="15" value="10" step="1">
+
+                            <input id="leftShadow3Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                        </div>
+
+                        <div class="colorWrapper" id="leftShadow3ColorWraper">
+                            <input type="color" id="leftShadow3Color" class="rangeColors">
+                        </div>
+                    </div>
+
+
+                    <div class="rangeWrapper">
+
+                        <div class="rangeOptions" id="leftIconShadowOptions">
+                            <input class="options" id="leftIconShadowBlur" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                            <input type="range" id="leftIconShadow" class="inputs" min="0" max="15" value="3" step="1">
+                            <input id="leftIconShadowStretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%">
+                        </div>
+
+                        <div class="colorWrapper" id="leftIconShadowColorWraper">
+                            <input type="color" id="leftIconShadowColor" class="rangeColors">
+                        </div>
+                    </div>
+                </div>
+
+
+        <div id="right-side-setting" class="sides-setting-wrapper">
+            <div class="sideBackgroundImage"><img src="" class="imagess"></div>
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" >
+                    <input type="range" id="rightBorder" class="inputs" min="0" max="15" value="3" step="1">
+                </div>
+
+                <div class="colorWrapper" id="rightBorderColorWraper">
+                    <input type="color" id="rightBorderColor" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="rightShadow1Options">
+                    <input id="rightShadow1Blur" class="options"  type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="rightShadow1" class="inputs" min="0" max="15" value="3" step="1">
+                    <input id="rightShadow1Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+                <div class="colorWrapper" id="rightShadow1ColorWraper">
+                    <input type="color" id="rightShadow1Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+                <div class="rangeOptions" id="rightShadow2Options">
+                    <input id="rightShadow2Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="rightShadow2" class="inputs" min="0" max="15" value="0" step="1">
+                    <input id="rightShadow2Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+
+                <div class="colorWrapper" id="rightShadow2ColorWraper">
+                    <input type="color" id="rightShadow2Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="rightShadow3Options">
+
+                    <input id="rightShadow3Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="rightShadow3" class="inputs" min="0" max="15" value="0" step="1">
+
+                    <input id="rightShadow3Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+
+                <div class="colorWrapper" id="rightShadow3ColorWraper">
+                    <input type="color" id="rightShadow3Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="rightIconShadowOptions">
+                    <input class="options" id="rightIconShadowBlur" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="rightIconShadow" class="inputs" min="0" max="15" value="3" step="1">
+                    <input id="rightIconShadowStretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%">
+                </div>
+
+                <div class="colorWrapper" id="rightIconShadowColorWraper">
+                    <input type="color" id="rightIconShadowColor" class="rangeColors">
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div id="bottom-side-setting" class="sides-setting-wrapper">
+            <div class="sideBackgroundImage"><img src="" class="imagess"></div>
+
+            <div class="rangeWrapper">
+                <div class="rangeOptions" >
+                    <input type="range" id="bottomBorder" class="inputs" min="0" max="15" value="3" step="1">
+                </div>
+
+                <div class="colorWrapper" id="bottomBorderColorWraper">
+                    <input type="color" id="bottomBorderColor" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="bottomShadow1Options">
+                    <input id="bottomShadow1Blur" class="options"  type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="bottomShadow1" class="inputs" min="0" max="15" value="3" step="1">
+                    <input id="bottomShadow1Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+                <div class="colorWrapper" id="bottomShadow1ColorWraper">
+                    <input type="color" id="bottomShadow1Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+                <div class="rangeOptions" id="bottomShadow2Options">
+                    <input id="bottomShadow2Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%">
+                    <input type="range" id="bottomShadow2" class="inputs" min="0" max="15" value="0" step="1">
+                    <input id="bottomShadow2Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+
+                <div class="colorWrapper" id="bottomShadow2ColorWraper">
+                    <input type="color" id="bottomShadow2Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="bottomShadow3Options">
+
+                    <input id="bottomShadow3Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="bottomShadow3" class="inputs" min="0" max="15" value="0" step="1">
+                    <input id="bottomShadow3Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+
+                <div class="colorWrapper" id="bottomShadow3ColorWraper">
+                    <input type="color" id="bottomShadow3Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="bottomIconShadowOptions">
+                    <input class="options" id="bottomIconShadowBlur" type="range" min="0" max="6" style="top: -20px; left: -50%" >
+                    <input type="range" id="bottomIconShadow" class="inputs" min="0" max="15" value="3" step="1">
+                    <input id="bottomIconShadowStretch" class="options" type="range" min="0" max="6" style="top: 20px; left: 150%">
+                </div>
+
+                <div class="colorWrapper" id="bottomIconShadowColorWraper">
+                    <input type="color" id="bottomIconShadowColor" class="rangeColors">
+                </div>
+            </div>
+        </div>
+
+
+        <div id="topp-side-setting" class="sides-setting-wrapper">
+            <div class="sideBackgroundImage"><img src="" class="imagess"></div>
+
+            <div class="rangeWrapper">
+                <div class="rangeOptions" >
+                    <input type="range" id="toppBorder" class="inputs" min="0" max="15" value="3" step="1">
+                </div>
+
+                <div class="colorWrapper" id="toppBorderColorWraper">
+                    <input type="color" id="toppBorderColor" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="toppShadow1Options">
+                    <input id="toppShadow1Blur" class="options"  type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="toppShadow1" class="inputs" min="0" max="15" value="3" step="1">
+                    <input id="toppShadow1Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+                <div class="colorWrapper" id="toppShadow1ColorWraper">
+                    <input type="color" id="toppShadow1Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+                <div class="rangeOptions" id="toppShadow2Options">
+                    <input id="toppShadow2Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="toppShadow2" class="inputs" min="0" max="15" value="0" step="1">
+                    <input id="toppShadow2Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+
+                <div class="colorWrapper" id="toppShadow2ColorWraper">
+                    <input type="color" id="toppShadow2Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="toppShadow3Options">
+
+                    <input id="toppShadow3Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="toppShadow3" class="inputs" min="0" max="15" value="0" step="1">
+
+                    <input id="toppShadow3Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+                </div>
+
+
+                <div class="colorWrapper" id="toppShadow3ColorWraper">
+                    <input type="color" id="toppShadow3Color" class="rangeColors">
+                </div>
+            </div>
+
+
+            <div class="rangeWrapper">
+
+                <div class="rangeOptions" id="toppIconShadowOptions">
+                    <input class="options" id="toppIconShadowBlur" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                    <input type="range" id="toppIconShadow" class="inputs" min="0" max="15" value="3" step="1">
+                    <input id="toppIconShadowStretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%">
+                </div>
+
+                <div class="colorWrapper" id="toppIconShadowColorWraper">
+                    <input type="color" id="toppIconShadowColor" class="rangeColors">
+                </div>
+            </div>
+        </div>
+
+
+    <div id="front-side-setting" class="sides-setting-wrapper">
+        <div class="sideBackgroundImage"><img src="" class="imagess"></div>
+
+        <div class="rangeWrapper">
+            <div class="rangeOptions" >
+                <input type="range" id="frontBorder" class="inputs" min="0" max="15" value="3" step="1">
+            </div>
+
+            <div class="colorWrapper" id="frontBorderColorWraper">
+                <input type="color" id="frontBorderColor" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper">
+
+            <div class="rangeOptions" id="frontShadow1Options">
+                <input id="frontShadow1Blur" class="options"  type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                <input type="range" id="frontShadow1" class="inputs" min="0" max="15" value="3" step="1">
+                <input id="frontShadow1Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+            </div>
+
+            <div class="colorWrapper" id="frontShadow1ColorWraper">
+                <input type="color" id="frontShadow1Color" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper">
+            <div class="rangeOptions" id="frontShadow2Options">
+                <input id="frontShadow2Blur" class="options" type="range" style="top: -20px; left: -50%" >
+                <input type="range" id="frontShadow2" class="inputs" min="0" max="15" value="0" step="1">
+                <input id="frontShadow2Stretch" class="options" type="range" style="top: 20px; left: 150%" >
+            </div>
+
+
+            <div class="colorWrapper" id="frontShadow2ColorWraper">
+                <input type="color" id="frontShadow2Color" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper">
+
+            <div class="rangeOptions" id="frontShadow3Options">
+
+                <input id="frontShadow3Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                <input type="range" id="frontShadow3" class="inputs" min="0" max="15" value="0" step="1">
+
+                <input id="frontShadow3Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+            </div>
+
+
+            <div class="colorWrapper" id="frontShadow3ColorWraper">
+                <input type="color" id="frontShadow3Color" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper">
+
+            <div class="rangeOptions" id="frontIconShadowOptions">
+                <input class="options" id="frontIconShadowBlur" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                <input type="range" id="frontIconShadow" class="inputs" min="0" max="15" value="3" step="1">
+                <input id="frontIconShadowStretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%">
+            </div>
+
+            <div class="colorWrapper" id="frontIconShadowColorWraper">
+                <input type="color" id="frontIconShadowColor" class="rangeColors">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="back-side-setting" class="sides-setting-wrapper">
+        <div class="sideBackgroundImage"><img src="" class="imagess"> </div>
+
+        <div class="rangeWrapper">
+            <div class="rangeOptions" >
+                <input type="range" id="backBorder" class="inputs" min="0" max="15" value="3" step="1">
+            </div>
+
+            <div class="colorWrapper" id="backBorderColorWraper">
+                <input type="color" id="backBorderColor" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper" >
+
+            <div class="rangeOptions" id="backShadow1Options">
+                <input id="backShadow1Blur" class="options"  type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                <input type="range" id="backShadow1" class="inputs" min="0" max="15" value="3" step="1">
+                <input id="backShadow1Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+            </div>
+
+            <div class="colorWrapper" id="backShadow1ColorWraper">
+                <input type="color" id="backShadow1Color" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper">
+            <div class="rangeOptions" id="backShadow2Options">
+                <input id="backShadow2Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                <input type="range" id="backShadow2" class="inputs" min="0" max="15" value="0" step="1">
+                <input id="backShadow2Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+            </div>
+
+
+            <div class="colorWrapper" id="backShadow2ColorWraper">
+                <input type="color" id="backShadow2Color" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper">
+
+            <div class="rangeOptions" id="backShadow3Options">
+                <input id="backShadow3Blur" class="options" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                <input type="range" id="backShadow3" class="inputs" min="0" max="15" value="0" step="1">
+                <input id="backShadow3Stretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%" >
+            </div>
+
+
+            <div class="colorWrapper" id="backShadow3ColorWraper">
+                <input type="color" id="backShadow3Color" class="rangeColors">
+            </div>
+        </div>
+
+
+        <div class="rangeWrapper">
+
+            <div class="rangeOptions" id="backIconShadowOptions">
+                <input class="options" id="backIconShadowBlur" type="range" min="0" max="10" style="top: -20px; left: -50%" >
+                <input type="range" id="backIconShadow" class="inputs" min="0" max="15" value="3" step="1">
+                <input id="backIconShadowStretch" class="options" type="range" min="0" max="10" style="top: 20px; left: 150%">
+            </div>
+
+            <div class="colorWrapper" id="backIconShadowColorWraper">
+                <input type="color" id="backIconShadowColor" class="rangeColors">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-------------------------------------------------------->
+
+
+
+
+    <div id="playerPane">
+
+        <div class="audioWaveWraper">
+
+            <div class="audioWaveColorWraper">
+
+                <div class="cssEqualizer">
+                    <div class="bars1" style="animation-delay: 0.4s"></div>
+                    <div class="bars1" style="animation-delay: 1.4s"></div>
+                    <div class="bars1" style="animation-delay: 0.8s"></div>
+                    <div class="bars1" style="animation-delay: 1s"></div>
+                    <div class="bars1" style="animation-delay: 0.3s"></div>
+                    <div class="bars1" style="animation-delay: 0.6s"></div>
+                    <div>
+                    <input type="color" id="can2color" class="waveColors" value="#c60128">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="audioWaveWraper">
+
+        <div class="audioWaveColorWraper">
+            <div class="cssEqualizer">
+                <div class="bars2"></div>
+                <div class="bars2"></div>
+                <div class="bars2"> </div>
+                <div class="bars2"></div>
+                <div class="bars2"></div>
+                <div class="bars2"></div>
+
+            </div>
+            <input type="color" id="can3color" class="waveColors" value="#ff0000">
+        </div>
+
+    </div>
+
+
+            <div class="audioWaveWraper">
+
+                <div class="audioWaveColorWraper">
+                    <div class="cssEqualizer">
+                        <div class="bars3"></div>
+                        <div class="bars3"></div>
+                        <div class="bars3"></div>
+                        <div class="bars3"></div>
+                        <div class="bars3"></div>
+                        <div class="bars3"></div>
+
+                    </div>
+                    <input type="color" id="can4color" class="waveColors" value="#fb2331">  
+                </div>
+
+            </div>
+
+        <div class="audioWaveWraper">
+
+        <div class="audioWaveColorWraper">
+            <div class="cssEqualizer">
+                <div class="bars4"></div>
+                <div class="bars4"></div>
+                <div class="bars4"> </div>
+                <div class="bars4"></div>
+                <div class="bars4"></div>
+                <div class="bars4"></div>
+
+            </div>
+            <input type="color" id="can5color" class="waveColors" value="#5900ff">
+        </div>
+
+        </div>
+
+
+        <div class="audioWaveWraper">
+
+            <div class="audioWaveColorWraper">
+                <div class="cssEqualizer">
+                    <div class="bars5"></div>
+                    <div class="bars5"></div>
+                    <div class="bars5"></div>
+                    <div class="bars5"></div>
+                    <div class="bars5"></div>
+                    <div class="bars5"></div>
+
+                </div>
+                <input type="color" id="can6color" class="waveColors" value="#5900ff">
+            </div>
+        </div>
+
+        <div class="audioWaveWraper">
+
+            <div class="audioWaveColorWraper">
+                <div class="cssEqualizer">
+                    <div class="bars6"></div>
+                    <div class="bars6"></div>
+                    <div class="bars6"></div>
+                    <div class="bars6"></div>
+                    <div class="bars6"></div>
+                    <div class="bars6"></div>
+
+                </div>
+                <input type="color" id="can7color" class="waveColors" value="#5900ff">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="chatPane" style="overflow: hidden">
+        <select id="mySelect" onchange="selectFont()" style="position: relative; float: left"> <!-- add method selectFont() -->
+            <option value="">Raleway</option>
+            <option value="">Monsrrat</option>
+            <option value="">Pacifico</option>
+            <option value="">Josefin Slab</option>
+            <option value="">Orbitron</option>
+            <option value="">Comfortaa</option>
+            <option value="mrs-eaves">Ubuntu</option>
+            <option value="linotype-sabon">Chewy</option>
+            <option value="ff-scala">Economica</option>
+            <option value="franklin-gothic-atf">Satisfy</option>
+            <option value="futura-pt">Titillium Web</option>
+            <option value="gill-sans-nova">Sans Serif: Gill Sans Nova</option>
+            <option value="interstate">Sans Serif: Interstate</option>
+            <option value="ff-meta-correspondence-web-p">Sans Serif: FF Meta</option>
+            <option value="neue-haas-grotesk-display">Sans Serif: Neue Haas Grotesk</option>
+            <option value="news-gothic-std">Sans Serif: News Gothic</option>
+        </select>
+
+        <input type="range" min="20" max="100" value="60" class="slider" id="fontSize" style="position: relative;">
+    </div>
+
+
+    <div id="userPagePane"></div>
+    <script>
+	window.onload = function(){
+	
+
+    var request = new XMLHttpRequest();
+    var arrString;
+    request.responseType ='json';
+    request.open('POST', 'http://localhost:8080/test/play', true);
+
+    request.onload = function(ev){
+
+        var arr = JSON.stringify(request.response);
+        var all = document.querySelectorAll('.list');
+            var i = 0;
+            arrString = arr.split('","');
+                arrString.map(item => {
+                    all[i].innerHTML = item;
+                    i++;
+                });
+                all[i].style.transformOrigin = 'center right';
+        // all[i].style.transform = 'rotateX('+ i*4 +'deg) translate('+i*4+'px '+i*5+'px)';
+
+    };
+    request.send();
+	}
+	</script>
+	<script src="resources/js/xxx.js"></script>
+		<script src="resources/js/websocket.js"></script>
+				<script src="resources/js/circletyp.min.js"></script>
+		
+	
+</body>
+</html>
